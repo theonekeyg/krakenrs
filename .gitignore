@@ -2,3 +2,6 @@
 
 # vscode
 *.code-workspace
+
+tags
+conf.json
