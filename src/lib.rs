@@ -12,10 +12,11 @@ use messages::{
     GetOpenOrdersRequest, KrakenResult, TickerRequest,
 };
 pub use messages::{
-    AddOrderResponse, AssetPairsResponse, AssetTickerInfo, AssetsResponse, BalanceResponse, BsType,
-    CancelAllOrdersAfterResponse, CancelAllOrdersResponse, CancelOrderResponse, GetOpenOrdersResponse,
-    GetWebSocketsTokenResponse, OrderAdded, OrderFlag, OrderInfo, OrderStatus, OrderType, SystemStatusResponse,
-    TickerResponse, TimeResponse, TxId, UserRefId,
+    AddOrderResponse, AssetPairsResponse, AssetTickerInfo, AssetsResponse, BalanceResponse,
+    AssetBalanceResponse, BsType, CancelAllOrdersAfterResponse, CancelAllOrdersResponse,
+    CancelOrderResponse, GetOpenOrdersResponse, GetWebSocketsTokenResponse, OrderAdded, OrderFlag,
+    OrderInfo, OrderStatus, OrderType, SystemStatusResponse, TickerResponse, TimeResponse, TxId,
+    UserRefId, GetAssetBalanceArgs
 };
 
 use core::convert::TryFrom;
@@ -103,6 +104,14 @@ impl KrakenRestAPI {
     /// (Private) Get the balance
     pub fn get_account_balance(&self) -> Result<BalanceResponse> {
         let result: Result<KrakenResult<BalanceResponse>> = self.client.query_private("Balance", Empty {});
+        result.and_then(unpack_kraken_result)
+    }
+
+    /// (Private) Get the balance for a specific asset
+    pub fn get_asset_balance(&self, asset: &String) -> Result<AssetBalanceResponse> {
+
+        let result: Result<KrakenResult<AssetBalanceResponse>> =
+            self.client.query_private("Balance", GetAssetBalanceArgs { asset: asset.clone() });
         result.and_then(unpack_kraken_result)
     }
 

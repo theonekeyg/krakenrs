@@ -34,6 +34,13 @@ pub fn unpack_kraken_result<ResultJson: Serialize>(src: KrakenResult<ResultJson>
 #[derive(Debug, Serialize, Deserialize)]
 pub struct Empty {}
 
+/// Arguments for Balance API call with asset arguments
+#[derive(Debug, Serialize, Deserialize)]
+pub struct GetAssetBalanceArgs {
+    /// Asset queury argument
+    pub asset: String,
+}
+
 /// Result of kraken public "Time" API call
 #[derive(Debug, Serialize, Deserialize)]
 pub struct TimeResponse {
@@ -143,6 +150,9 @@ pub type TickerResponse = HashMap<String, AssetTickerInfo>;
 
 /// Type alias for response of Balance API call
 pub type BalanceResponse = HashMap<String, Decimal>;
+
+/// Type alias for response of Balance API with single asset
+pub type AssetBalanceResponse = HashMap<String, Decimal>;
 
 /// TxId are represented as String's in kraken json api
 pub type TxId = String;

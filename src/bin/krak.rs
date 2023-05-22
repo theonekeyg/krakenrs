@@ -42,6 +42,8 @@ enum Command {
     Ticker { pairs: Vec<String> },
     /// Get account balance
     GetBalance,
+    /// Get account balance for particular asset:
+    GetAsset { asset: String },
     /// Get websockets token
     GetWebSocketsToken,
     /// Get open orders list
@@ -151,6 +153,10 @@ fn main() {
             let result = api.get_account_balance().expect("api call failed");
             let sorted_result = result.into_iter().collect::<BTreeMap<_, _>>();
             log_value(&sorted_result);
+        }
+        Command::GetAsset { asset } => {
+            let res = api.get_asset_balance(&asset).expect("api call failed");
+            log_value(&res);
         }
         Command::GetWebSocketsToken => {
             let result = api.get_websockets_token().expect("api call failed");
