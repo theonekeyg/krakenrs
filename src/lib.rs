@@ -16,7 +16,7 @@ pub use messages::{
     AssetBalanceResponse, BsType, CancelAllOrdersAfterResponse, CancelAllOrdersResponse,
     CancelOrderResponse, GetOpenOrdersResponse, GetWebSocketsTokenResponse, OrderAdded, OrderFlag,
     OrderInfo, OrderStatus, OrderType, SystemStatusResponse, TickerResponse, TimeResponse, TxId,
-    UserRefId, GetAssetBalanceArgs
+    UserRefId, GetAssetBalanceArgs, AssetPair
 };
 
 use core::convert::TryFrom;
