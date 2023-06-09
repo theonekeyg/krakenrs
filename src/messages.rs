@@ -98,7 +98,7 @@ pub struct AssetPairsRequest {
 }
 
 /// (Substructure within) Result of kraken public "Asset Pairs" API call
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AssetPair {
     /// Alternate pair name
     pub alt_name: Option<String>,
