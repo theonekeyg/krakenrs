@@ -101,7 +101,7 @@ pub struct AssetPairsRequest {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AssetPair {
     /// Alternate pair name
-    pub alt_name: Option<String>,
+    pub altname: Option<String>,
     /// Web-sockets pair name (if available)
     pub wsname: Option<String>,
     /// Asset class of base component
@@ -112,6 +112,10 @@ pub struct AssetPair {
     pub aclass_quote: String,
     /// Asset id of quote component
     pub quote: String,
+    // /// Volume lot size
+    // pub lot: String - deprecated
+    /// Scaling decimal places for cost
+    pub cost_decimals: u64,
     /// Scaling decimal places for pair
     pub pair_decimals: u64,
     /// Scaling decimal places for volume
@@ -120,8 +124,16 @@ pub struct AssetPair {
     pub lot_multiplier: u64,
     /// Fee schedule array in [volume, percent] tuples
     pub fees: Vec<Vec<Decimal>>,
+    /// Volume discount currency
+    pub fee_volume_currency: String,
     /// Minimum order size (in terms of base currency)
     pub ordermin: Option<Decimal>,
+    /// Minimum order cost (in terms of quote currency)
+    pub costmin: Option<Decimal>,
+    /// Minimum increment between valid price levels
+    pub tick_size: Option<Decimal>,
+    /// Status of asset. Possible values: online, cancel_only, post_only, limit_only, reduce_only
+    pub status: String,
 }
 
 /// Type alias for response of AssetPairs API call
